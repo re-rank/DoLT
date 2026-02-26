@@ -284,20 +284,23 @@ def _create_exporter(config: DoltConfig) -> BaseExporter:
     target = config.export.target
     if target == ExportTarget.QDRANT:
         from dolt.export.qdrant_exporter import QdrantExporter
-        cfg = config.export.qdrant
+        qdrant_cfg = config.export.qdrant
         return QdrantExporter(
-            url=cfg.url, port=cfg.port,
-            collection_name=cfg.collection, api_key=cfg.api_key,
+            url=qdrant_cfg.url, port=qdrant_cfg.port,
+            collection_name=qdrant_cfg.collection, api_key=qdrant_cfg.api_key,
         )
     elif target == ExportTarget.PINECONE:
         from dolt.export.pinecone_exporter import PineconeExporter
-        cfg = config.export.pinecone
-        return PineconeExporter(index_name=cfg.index, namespace=cfg.namespace)
+        pinecone_cfg = config.export.pinecone
+        return PineconeExporter(
+            index_name=pinecone_cfg.index, namespace=pinecone_cfg.namespace,
+        )
     elif target == ExportTarget.JSON:
         from dolt.export.json_exporter import JSONExporter
-        cfg = config.export.json_export
+        json_cfg = config.export.json_export
         return JSONExporter(
-            output_path=cfg.output, include_vectors=cfg.include_vectors,
+            output_path=json_cfg.output,
+            include_vectors=json_cfg.include_vectors,
         )
     else:
         from dolt.export.json_exporter import JSONExporter

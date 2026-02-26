@@ -46,7 +46,8 @@ class LocalEmbeddingProvider(BaseEmbeddingProvider):
 
         for i in range(0, len(texts), self._batch_size):
             batch = texts[i : i + self._batch_size]
-            embeddings = self._model.encode(batch, show_progress_bar=False)  # type: ignore[union-attr]
+            assert self._model is not None
+            embeddings = self._model.encode(batch, show_progress_bar=False)
             all_vectors.extend(embeddings.tolist())
             logger.info("배치 %d/%d 완료 (%d chunks)", i // self._batch_size + 1,
                        (len(texts) + self._batch_size - 1) // self._batch_size,

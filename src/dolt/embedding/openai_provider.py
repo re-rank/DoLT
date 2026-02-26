@@ -59,7 +59,9 @@ class OpenAIEmbeddingProvider(BaseEmbeddingProvider):
 
         return all_vectors
 
-    def _embed_batch(self, client, batch: list[str], rate_limit_cls: type) -> list[list[float]]:
+    def _embed_batch(
+        self, client, batch: list[str], rate_limit_cls: type[Exception],
+    ) -> list[list[float]]:
         """단일 배치를 임베딩한다. 재시도 로직 포함."""
         for attempt in range(self._max_retries + 1):
             try:

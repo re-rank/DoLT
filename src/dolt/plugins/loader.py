@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import sys
+from importlib.metadata import entry_points
 
 from dolt.utils.logging import get_logger
 
@@ -11,13 +11,7 @@ logger = get_logger("plugins")
 
 def discover_plugins(group: str) -> list[type]:
     """entry_points에서 지정 그룹의 플러그인을 발견한다."""
-    if sys.version_info >= (3, 12):
-        from importlib.metadata import entry_points
-        eps = entry_points(group=group)
-    else:
-        from importlib.metadata import entry_points
-        all_eps = entry_points()
-        eps = all_eps.get(group, []) if isinstance(all_eps, dict) else all_eps.select(group=group)
+    eps = entry_points(group=group)
 
     plugins: list[type] = []
     for ep in eps:

@@ -8,7 +8,11 @@
       "WebFetch(domain:trendshift.io)",
       "WebSearch",
       "Bash(gh auth:*)",
-      "Bash(git -C /e/DoLT remote -v 2>&1 && git -C /e/DoLT push --dry-run 2>&1)"
+      "Bash(git -C /e/DoLT remote -v 2>&1 && git -C /e/DoLT push --dry-run 2>&1)",
+      "WebFetch(domain:github.com)",
+      "Bash(cd /e/DoLT && mypy src/dolt/ --ignore-missing-imports 2>&1)",
+      "Bash(cd:*)",
+      "Bash(pip install:*)"
     ]
   }
 }

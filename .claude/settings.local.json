@@ -28,7 +28,10 @@
       "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m pytest tests/ -v --tb=short --no-header -q 2>&1)",
       "Bash(true:*)",
       "Bash(cd /e/DoLT && python -m mypy src/dolt/parsing/pdf_parser.py src/dolt/chunking/token_chunker.py --ignore-missing-imports 2>&1)",
-      "Bash(cd /e/DoLT && python -m mypy src/dolt/chunking/structure_chunker.py --ignore-missing-imports 2>&1)"
+      "Bash(cd /e/DoLT && python -m mypy src/dolt/chunking/structure_chunker.py --ignore-missing-imports 2>&1)",
+      "WebFetch(domain:docling-project.github.io)",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:www.codecademy.com)"
     ]
   }
 }

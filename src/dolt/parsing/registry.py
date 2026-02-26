@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from importlib.util import find_spec
+
 from dolt.errors import UnsupportedFormatError
 from dolt.parsing.base import BaseParser
 from dolt.utils.logging import get_logger
@@ -35,15 +37,28 @@ class ParserRegistry:
 
 
 def create_default_registry() -> ParserRegistry:
-    """빌트인 파서를 모두 등록한 기본 레지스트리를 생성한다."""
+    """빌트인 파서를 모두 등록한 기본 레지스트리를 생성한다.
+
+    PDF 파서: docling 설치 시 DoclingParser(OCR 지원), 미설치 시 PDFParser(PyMuPDF).
+    """
     from dolt.parsing.docx_parser import DOCXParser
     from dolt.parsing.html_parser import HTMLParser
     from dolt.parsing.markdown_parser import MarkdownParser
-    from dolt.parsing.pdf_parser import PDFParser
     from dolt.parsing.text_parser import PlainTextParser
 
     registry = ParserRegistry()
-    registry.register(PDFParser())
+
+    # PDF: docling 설치 시 OCR 지원 파서 우선 사용
+    if find_spec("docling") is not None:
+        from dolt.parsing.docling_parser import DoclingParser
+
+        registry.register(DoclingParser())
+        logger.info("PDF 파서: DoclingParser (OCR 지원)")
+    else:
+        from dolt.parsing.pdf_parser import PDFParser
+
+        registry.register(PDFParser())
+
     registry.register(DOCXParser())
     registry.register(HTMLParser())
     registry.register(MarkdownParser())

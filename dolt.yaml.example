@@ -1,0 +1,36 @@
+# DoLT 설정 파일 예시
+# 이 파일을 dolt.yaml로 복사하여 사용하세요.
+
+chunking:
+  mode: hybrid            # token | structure | hybrid
+  max_tokens: 512
+  overlap_tokens: 50
+  tokenizer: cl100k_base
+
+embedding:
+  provider: openai        # openai | cohere | local
+  # model: text-embedding-3-small
+  batch_size: 100
+  max_retries: 3
+
+export:
+  target: json            # qdrant | pinecone | json | postgres
+  qdrant:
+    url: localhost
+    port: 6333
+    collection: dolt_documents
+  json:
+    output: .dolt/export.json
+    include_vectors: true
+
+metadata:
+  plugins:
+    - basic_meta
+    - word_count
+    - section_path
+
+logging:
+  level: INFO
+
+storage:
+  path: .dolt

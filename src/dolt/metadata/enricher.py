@@ -42,7 +42,7 @@ class MetadataEnricher:
 
 def _default_plugins() -> list[MetadataPlugin]:
     from dolt.metadata.builtin.basic_meta import BasicMetaPlugin
-    from dolt.metadata.builtin.word_count import WordCountPlugin
     from dolt.metadata.builtin.section_path import SectionPathPlugin
+    from dolt.metadata.builtin.word_count import WordCountPlugin
 
     return [BasicMetaPlugin(), WordCountPlugin(), SectionPathPlugin()]

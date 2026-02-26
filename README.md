@@ -93,7 +93,7 @@ pip install dolt
 또는 소스에서 설치:
 
 ```bash
-git clone https://github.com/your-org/dolt.git
+git clone https://github.com/re-rank/DoLT.git
 cd dolt
 pip install -e .
 ```
@@ -294,7 +294,7 @@ DoLT는 `.dolt/` 디렉토리에 각 단계의 중간 결과를 저장합니다.
 ### 개발 환경 설정
 
 ```bash
-git clone https://github.com/your-org/dolt.git
+git clone https://github.com/re-rank/DoLT.git
 cd dolt
 pip install -e ".[dev]"
 ```
@@ -425,7 +425,7 @@ pip install dolt
 Or install from source:
 
 ```bash
-git clone https://github.com/your-org/dolt.git
+git clone https://github.com/re-rank/DoLT.git
 cd dolt
 pip install -e .
 ```
@@ -587,7 +587,7 @@ All contributions are welcome -- bug reports, feature requests, code, documentat
 ### Development Setup
 
 ```bash
-git clone https://github.com/your-org/dolt.git
+git clone https://github.com/re-rank/DoLT.git
 cd dolt
 pip install -e ".[dev]"
 ```

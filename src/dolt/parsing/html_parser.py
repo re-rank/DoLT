@@ -54,7 +54,10 @@ class HTMLParser(BaseParser):
             for sibling in tag.next_siblings:
                 if hasattr(sibling, "name") and sibling.name in _HEADING_TAGS:
                     break
-                text = sibling.get_text(strip=True) if hasattr(sibling, "get_text") else str(sibling).strip()
+                if hasattr(sibling, "get_text"):
+                    text = sibling.get_text(strip=True)
+                else:
+                    text = str(sibling).strip()
                 if text:
                     body_parts.append(text)
 

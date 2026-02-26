@@ -18,7 +18,9 @@ class HybridChunker(BaseChunker):
         chunks = structure_chunker.chunk(doc)
 
         # 2차: 작은 텍스트 청크 병합
-        chunks = _merge_small_chunks(chunks, MIN_TOKENS, self.config.max_tokens, self.config.tokenizer)
+        chunks = _merge_small_chunks(
+            chunks, MIN_TOKENS, self.config.max_tokens, self.config.tokenizer
+        )
 
         # chunk_index 재정렬
         for i, c in enumerate(chunks):

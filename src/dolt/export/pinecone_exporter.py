@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import os
 
-from dolt.export.base import BaseExporter, ExportResult
 from dolt.errors import APIKeyMissingError
+from dolt.export.base import BaseExporter, ExportResult
 from dolt.models.chunk import EmbeddedChunk
 from dolt.utils.logging import get_logger
 
@@ -51,7 +51,7 @@ class PineconeExporter(BaseExporter):
                         "chunk_type": chunk.chunk_type.value,
                         "chunk_index": chunk.chunk_index,
                         **{k: v for k, v in chunk.metadata.items()
-                           if isinstance(v, (str, int, float, bool))},
+                           if isinstance(v, str | int | float | bool)},
                     },
                 }
                 for chunk in batch

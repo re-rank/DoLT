@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(which gh 2>&1 && gh auth status 2>&1)",
+      "Bash(cd /e/DoLT && ruff check src/ 2>&1)",
+      "Bash(cd /e/DoLT && ruff check src/ --fix 2>&1)",
+      "Bash(tail:*)",
+      "WebFetch(domain:trendshift.io)",
+      "WebSearch",
+      "Bash(gh auth:*)",
+      "Bash(git -C /e/DoLT remote -v 2>&1 && git -C /e/DoLT push --dry-run 2>&1)"
+    ]
+  }
+}

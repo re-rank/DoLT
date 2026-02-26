@@ -6,9 +6,8 @@ import uuid
 
 from dolt.chunking.base import BaseChunker
 from dolt.models.chunk import Chunk, ChunkType
-from dolt.models.config import ChunkConfig
 from dolt.models.document import StructuredDocument
-from dolt.utils.tokens import count_tokens, detokenize, tokenize
+from dolt.utils.tokens import detokenize, tokenize
 
 
 class TokenChunker(BaseChunker):

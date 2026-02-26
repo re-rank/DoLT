@@ -36,10 +36,10 @@ class ParserRegistry:
 
 def create_default_registry() -> ParserRegistry:
     """빌트인 파서를 모두 등록한 기본 레지스트리를 생성한다."""
-    from dolt.parsing.pdf_parser import PDFParser
     from dolt.parsing.docx_parser import DOCXParser
     from dolt.parsing.html_parser import HTMLParser
     from dolt.parsing.markdown_parser import MarkdownParser
+    from dolt.parsing.pdf_parser import PDFParser
 
     registry = ParserRegistry()
     registry.register(PDFParser())

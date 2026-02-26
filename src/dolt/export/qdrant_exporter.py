@@ -33,7 +33,6 @@ class QdrantExporter(BaseExporter):
             return False
 
     def export(self, chunks: list[EmbeddedChunk]) -> ExportResult:
-        from qdrant_client import QdrantClient
         from qdrant_client.models import Distance, PointStruct, VectorParams
 
         client = self._get_client()

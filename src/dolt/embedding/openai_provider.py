@@ -43,7 +43,8 @@ class OpenAIEmbeddingProvider(BaseEmbeddingProvider):
         return _MODEL_DIMS.get(self._model, 1536)
 
     def embed(self, texts: list[str]) -> list[list[float]]:
-        from openai import OpenAI, RateLimitError as OpenAIRateLimit
+        from openai import OpenAI
+        from openai import RateLimitError as OpenAIRateLimit
 
         client = OpenAI(api_key=self._api_key)
         all_vectors: list[list[float]] = []

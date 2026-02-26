@@ -9,8 +9,8 @@ from pathlib import Path
 import httpx
 
 from dolt.errors import (
-    FileTooLargeError,
     FileNotFoundError,
+    FileTooLargeError,
     UnsupportedFormatError,
     URLFetchError,
 )

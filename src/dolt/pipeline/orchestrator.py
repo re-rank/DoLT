@@ -10,7 +10,7 @@ from dolt.chunking.hybrid_chunker import HybridChunker
 from dolt.chunking.structure_chunker import StructureChunker
 from dolt.chunking.token_chunker import TokenChunker
 from dolt.embedding.base import BaseEmbeddingProvider
-from dolt.export.base import BaseExporter, ExportResult
+from dolt.export.base import BaseExporter
 from dolt.ingestion.ingestor import Ingestor
 from dolt.metadata.enricher import MetadataEnricher
 from dolt.models.chunk import Chunk, EmbeddedChunk

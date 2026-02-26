@@ -64,7 +64,14 @@ class JsonExportConfig(BaseModel):
     include_vectors: bool = Field(default=True)
 
 
+class WeaviateConfig(BaseModel):
+    url: str = Field(default="http://localhost:8080")
+    collection: str = Field(default="DoltDocuments")
+    api_key: str | None = Field(default=None)
+
+
 class PostgresConfig(BaseModel):
+    dsn: str = Field(default="postgresql://localhost:5432/dolt")
     table: str = Field(default="dolt_chunks")
     use_pgvector: bool = Field(default=True)
 
@@ -75,6 +82,7 @@ class ExportConfig(BaseModel):
     target: ExportTarget = Field(default=ExportTarget.JSON)
     qdrant: QdrantConfig = Field(default_factory=QdrantConfig)
     pinecone: PineconeConfig = Field(default_factory=PineconeConfig)
+    weaviate: WeaviateConfig = Field(default_factory=WeaviateConfig)
     json_export: JsonExportConfig = Field(default_factory=JsonExportConfig, alias="json")
     postgres: PostgresConfig = Field(default_factory=PostgresConfig)
 

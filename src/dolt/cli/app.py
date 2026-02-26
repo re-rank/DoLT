@@ -232,7 +232,7 @@ def embed(
 @app.command(name="export")
 def export_cmd(
     target: ExportTarget = typer.Option(
-        ExportTarget.JSON, "--target", help="qdrant/pinecone/json/postgres"
+        ExportTarget.JSON, "--target", help="qdrant/pinecone/weaviate/json/postgres"
     ),
     collection: str = typer.Option("dolt_documents", "--collection"),
     output: str = typer.Option(".dolt/export.json", "--output", help="JSON export 경로"),
@@ -243,6 +243,8 @@ def export_cmd(
     overrides: dict = {"export": {"target": target.value}}
     if target == ExportTarget.QDRANT:
         overrides["export"]["qdrant"] = {"collection": collection}
+    elif target == ExportTarget.WEAVIATE:
+        overrides["export"]["weaviate"] = {"collection": collection}
     elif target == ExportTarget.JSON:
         overrides["export"]["json"] = {"output": output}
     cfg = DoltConfig.load(config, cli_overrides=overrides)

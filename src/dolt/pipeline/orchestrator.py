@@ -295,6 +295,20 @@ def _create_exporter(config: DoltConfig) -> BaseExporter:
         return PineconeExporter(
             index_name=pinecone_cfg.index, namespace=pinecone_cfg.namespace,
         )
+    elif target == ExportTarget.WEAVIATE:
+        from dolt.export.weaviate_exporter import WeaviateExporter
+        weaviate_cfg = config.export.weaviate
+        return WeaviateExporter(
+            url=weaviate_cfg.url,
+            collection_name=weaviate_cfg.collection,
+            api_key=weaviate_cfg.api_key,
+        )
+    elif target == ExportTarget.POSTGRES:
+        from dolt.export.postgres_exporter import PostgresExporter
+        pg_cfg = config.export.postgres
+        return PostgresExporter(
+            dsn=pg_cfg.dsn, table=pg_cfg.table, use_pgvector=pg_cfg.use_pgvector,
+        )
     elif target == ExportTarget.JSON:
         from dolt.export.json_exporter import JSONExporter
         json_cfg = config.export.json_export

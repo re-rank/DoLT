@@ -59,9 +59,28 @@ dev = [
 dolt = "dolt.cli.app:main"
 
 [project.entry-points."dolt.parsers"]
+pdf = "dolt.parsing.pdf_parser:PDFParser"
+docx = "dolt.parsing.docx_parser:DOCXParser"
+html = "dolt.parsing.html_parser:HTMLParser"
+markdown = "dolt.parsing.markdown_parser:MarkdownParser"
+text = "dolt.parsing.text_parser:PlainTextParser"
+
 [project.entry-points."dolt.metadata_plugins"]
+basic_meta = "dolt.metadata.builtin.basic_meta:BasicMetaPlugin"
+word_count = "dolt.metadata.builtin.word_count:WordCountPlugin"
+section_path = "dolt.metadata.builtin.section_path:SectionPathPlugin"
+
 [project.entry-points."dolt.embedding_providers"]
+openai = "dolt.embedding.openai_provider:OpenAIEmbeddingProvider"
+cohere = "dolt.embedding.cohere_provider:CohereEmbeddingProvider"
+local = "dolt.embedding.local_provider:LocalEmbeddingProvider"
+
 [project.entry-points."dolt.exporters"]
+json = "dolt.export.json_exporter:JSONExporter"
+qdrant = "dolt.export.qdrant_exporter:QdrantExporter"
+pinecone = "dolt.export.pinecone_exporter:PineconeExporter"
+weaviate = "dolt.export.weaviate_exporter:WeaviateExporter"
+postgres = "dolt.export.postgres_exporter:PostgresExporter"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/dolt"]
@@ -87,6 +106,8 @@ module = [
     "dolt.parsing.pdf_parser",
     "dolt.parsing.docx_parser",
     "dolt.embedding.local_provider",
+    "dolt.export.weaviate_exporter",
+    "dolt.export.postgres_exporter",
 ]
 ignore_errors = true
 

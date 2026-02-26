@@ -80,9 +80,19 @@ def chunk_text_by_tokens(
 
 
 def _snap_to_sentence(text: str) -> str | None:
-    """마지막 문장 경계(마침표, 줄바꿈)에서 자른다."""
-    for sep in ["\n\n", "\n", ". ", "。", "? ", "! "]:
+    """마지막 문장/단락 경계에서 자른다. 가장 뒤쪽 경계를 선택."""
+    min_pos = int(len(text) * 0.5)
+    best_end = -1
+
+    for sep in [
+        "\n\n", "\n",
+        ". ", ".\n", "? ", "?\n", "! ", "!\n",
+        "。", "？", "！",
+    ]:
         last = text.rfind(sep)
-        if last > len(text) * 0.5:
-            return text[: last + len(sep)]
-    return None
+        if last >= min_pos:
+            end = last + len(sep)
+            if end > best_end:
+                best_end = end
+
+    return text[:best_end] if best_end > -1 else None

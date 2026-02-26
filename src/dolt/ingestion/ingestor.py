@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import mimetypes
+import shutil
 import uuid
 from pathlib import Path
 
@@ -90,6 +91,12 @@ class Ingestor:
             status=status,
             mime_type=mime_type or "application/octet-stream",
         )
+
+        # 원본 파일을 캐시에 복사 (임시파일 삭제 대비)
+        cache_path = self.store.base / "cache" / f"{file_hash}{ext}"
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        if not cache_path.exists():
+            shutil.copy2(str(path), str(cache_path))
 
         self.store.upsert_document(doc)
         logger.info("수집 완료 (%s): %s [%s]", status.value, source_str, doc_id)
@@ -179,10 +186,14 @@ class Ingestor:
         return doc
 
     def get_file_path(self, doc: IngestedDocument) -> Path:
-        """IngestedDocument의 실제 파일 경로를 반환한다. URL은 캐시 경로."""
+        """IngestedDocument의 실제 파일 경로를 반환한다. 원본이 없으면 캐시 경로."""
+        cache_path = self.store.base / "cache" / f"{doc.hash}{doc.file_ext}"
         if doc.source.startswith(("http://", "https://")):
-            return self.store.base / "cache" / f"{doc.hash}{doc.file_ext}"
-        return Path(doc.source)
+            return cache_path
+        original = Path(doc.source)
+        if original.exists():
+            return original
+        return cache_path
 
 
 def _content_type_to_ext(content_type: str) -> str:

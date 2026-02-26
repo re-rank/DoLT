@@ -12,7 +12,15 @@
       "WebFetch(domain:github.com)",
       "Bash(cd /e/DoLT && mypy src/dolt/ --ignore-missing-imports 2>&1)",
       "Bash(cd:*)",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(echo NOT INSTALLED:*)",
+      "Bash(cd E:/DoLT && python -m dolt ingest tests/fixtures/sample_docs/ 2>&1)",
+      "Bash(cd E:/DoLT && python -m dolt ingest tests/fixtures/sample_docs/ -v 2>&1)",
+      "Bash(cd E:/DoLT && python -m dolt parse 2>&1)",
+      "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m dolt parse 2>&1)",
+      "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m dolt chunk 2>&1)",
+      "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m dolt status 2>&1)",
+      "Bash(cd E:/DoLT && python -m mypy src/dolt/ 2>&1)"
     ]
   }
 }

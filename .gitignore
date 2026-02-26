@@ -29,6 +29,7 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+tests/fixtures/sample_docs/
 
 # OS
 .DS_Store

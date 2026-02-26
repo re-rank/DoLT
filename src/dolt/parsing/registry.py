@@ -40,10 +40,12 @@ def create_default_registry() -> ParserRegistry:
     from dolt.parsing.html_parser import HTMLParser
     from dolt.parsing.markdown_parser import MarkdownParser
     from dolt.parsing.pdf_parser import PDFParser
+    from dolt.parsing.text_parser import PlainTextParser
 
     registry = ParserRegistry()
     registry.register(PDFParser())
     registry.register(DOCXParser())
     registry.register(HTMLParser())
     registry.register(MarkdownParser())
+    registry.register(PlainTextParser())
     return registry

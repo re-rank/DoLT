@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import time
+from collections.abc import Callable
 
 from pydantic import BaseModel, Field
 
@@ -51,12 +52,18 @@ class PipelineOrchestrator:
         self,
         source: str,
         skip_unchanged: bool = True,
+        on_stage_complete: Callable[[str, StageResult], None] | None = None,
     ) -> PipelineResult:
         overall_start = time.time()
         result = PipelineResult()
 
+        def _notify(stage: str) -> None:
+            if on_stage_complete and stage in result.stages:
+                on_stage_complete(stage, result.stages[stage])
+
         # 1. Ingest
         docs = self._ingest(source, result)
+        _notify("ingest")
         if skip_unchanged:
             docs = [d for d in docs if d.status != IngestStatus.UNCHANGED]
         if not docs:
@@ -66,18 +73,23 @@ class PipelineOrchestrator:
 
         # 2. Parse
         parsed_docs = self._parse(docs, result)
+        _notify("parse")
 
         # 3. Chunk
         all_chunks = self._chunk(parsed_docs, result)
+        _notify("chunk")
 
         # 4. Enrich
         all_chunks = self._enrich(all_chunks, parsed_docs, result)
+        _notify("enrich")
 
         # 5. Embed
         embedded_chunks = self._embed(all_chunks, result)
+        _notify("embed")
 
         # 6. Export
         self._export(embedded_chunks, result)
+        _notify("export")
 
         result.elapsed_seconds = time.time() - overall_start
         logger.info("파이프라인 완료: %.1f초", result.elapsed_seconds)

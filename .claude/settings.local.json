@@ -23,7 +23,10 @@
       "Bash(cd E:/DoLT && python -m mypy src/dolt/ 2>&1)",
       "Bash(wc:*)",
       "Bash(head:*)",
-      "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m pytest tests/ -v --tb=short --no-header 2>&1)"
+      "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m pytest tests/ -v --tb=short --no-header 2>&1)",
+      "Bash(cd E:/DoLT && python -m mypy src/dolt/ --exclude 'web/' 2>&1)",
+      "Bash(cd E:/DoLT && PYTHONIOENCODING=utf-8 python -m pytest tests/ -v --tb=short --no-header -q 2>&1)",
+      "Bash(true:*)"
     ]
   }
 }

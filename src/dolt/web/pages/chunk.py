@@ -8,7 +8,9 @@ from dolt.metadata.enricher import MetadataEnricher
 from dolt.models.config import ChunkConfig, ChunkMode
 from dolt.pipeline.orchestrator import _create_chunker
 from dolt.web.components.chunk_card import render_chunk_cards
-from dolt.web.state import get_config, get_store
+from dolt.web.state import get_config, get_store, init_state
+
+init_state()
 
 
 def render() -> None:
@@ -64,3 +66,6 @@ def render() -> None:
 
     chunks = store.load_chunks(doc.doc_id)
     render_chunk_cards(chunks)
+
+
+render()

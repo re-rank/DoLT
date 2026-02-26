@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import pandas as pd
 import streamlit as st
 
 from dolt.ingestion.ingestor import Ingestor
 from dolt.parsing.registry import create_default_registry
 from dolt.web.components.section_tree import render_section_tree
-from dolt.web.state import get_store
+from dolt.web.state import get_store, init_state
+
+init_state()
 
 
 def render() -> None:
@@ -77,7 +80,6 @@ def render() -> None:
         if structured.tables:
             for tbl in structured.tables:
                 st.subheader(f"Table: {tbl.table_id}")
-                import pandas as pd
                 if tbl.headers and tbl.rows:
                     df = pd.DataFrame(tbl.rows, columns=tbl.headers)
                     st.dataframe(df, use_container_width=True, hide_index=True)
@@ -95,3 +97,6 @@ def render() -> None:
 
     with tab_raw:
         st.text_area("원본 텍스트", structured.raw_text, height=400, disabled=True)
+
+
+render()

@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import pandas as pd
 import streamlit as st
 
-from dolt.web.state import get_store
+from dolt.web.state import get_store, init_state
+
+init_state()
 
 
 def render() -> None:
@@ -41,7 +44,6 @@ def render() -> None:
         st.markdown(f"- **Unchanged**: {unchanged}")
 
     with col_b:
-        import pandas as pd
         status_data = {"상태": ["new", "updated", "unchanged"], "수": [new, updated, unchanged]}
         df = pd.DataFrame(status_data)
         st.bar_chart(df, x="상태", y="수")
@@ -63,5 +65,7 @@ def render() -> None:
             "임베딩": e,
         })
 
-    import pandas as pd
     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+
+
+render()

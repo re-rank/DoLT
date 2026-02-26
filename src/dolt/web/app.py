@@ -4,55 +4,23 @@ from __future__ import annotations
 
 import streamlit as st
 
-from dolt.web.state import init_state
+# 네이티브 멀티페이지 네비게이션
+pages = [
+    st.Page("pages/dashboard.py", title="Dashboard", icon=":material/dashboard:"),
+    st.Page("pages/ingest.py", title="Ingest", icon=":material/upload_file:"),
+    st.Page("pages/parse.py", title="Parse", icon=":material/article:"),
+    st.Page("pages/chunk.py", title="Chunk", icon=":material/view_module:"),
+    st.Page("pages/embed.py", title="Embed", icon=":material/hub:"),
+    st.Page("pages/export.py", title="Export", icon=":material/cloud_upload:"),
+    st.Page("pages/run_pipeline.py", title="Run Pipeline", icon=":material/play_circle:"),
+]
 
-# 페이지 설정
-st.set_page_config(
-    page_title="DoLT",
-    page_icon=":material/description:",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-# 세션 초기화
-init_state()
-
-# 사이드바 네비게이션
-st.sidebar.title("DoLT")
-st.sidebar.caption("Document-native ELT Engine")
-
-PAGES = {
-    "Dashboard": "dashboard",
-    "Ingest": "ingest",
-    "Parse": "parse",
-    "Chunk": "chunk",
-    "Embed": "embed",
-    "Export": "export",
-    "Run Pipeline": "run_pipeline",
-}
-
-page = st.sidebar.radio("Navigate", list(PAGES.keys()), label_visibility="collapsed")
+pg = st.navigation(pages)
 
 st.sidebar.divider()
-st.sidebar.caption(f"Storage: `{st.session_state.config.storage.path}`")
+st.sidebar.caption("DoLT — Document-native ELT Engine")
 
-# 페이지 라우팅
-if page == "Dashboard":
-    from dolt.web.pages.dashboard import render
-elif page == "Ingest":
-    from dolt.web.pages.ingest import render
-elif page == "Parse":
-    from dolt.web.pages.parse import render
-elif page == "Chunk":
-    from dolt.web.pages.chunk import render
-elif page == "Embed":
-    from dolt.web.pages.embed import render
-elif page == "Export":
-    from dolt.web.pages.export import render
-elif page == "Run Pipeline":
-    from dolt.web.pages.run_pipeline import render
-
-render()
+pg.run()
 
 
 def main() -> None:

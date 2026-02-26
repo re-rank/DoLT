@@ -10,7 +10,9 @@ import streamlit as st
 from dolt.models.config import ChunkMode, EmbeddingProvider, ExportTarget
 from dolt.pipeline.orchestrator import PipelineOrchestrator, StageResult
 from dolt.web.components.progress_tracker import STAGES, STAGE_LABELS
-from dolt.web.state import get_config
+from dolt.web.state import get_config, init_state
+
+init_state()
 
 
 def render() -> None:
@@ -120,3 +122,6 @@ def render() -> None:
             st.warning("청킹까지 완료되었으나 임베딩/내보내기에 실패했습니다.")
         else:
             st.info("처리할 새 문서가 없습니다.")
+
+
+render()

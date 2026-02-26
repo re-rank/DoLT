@@ -6,7 +6,9 @@ import streamlit as st
 
 from dolt.models.config import ExportTarget
 from dolt.pipeline.orchestrator import _create_exporter
-from dolt.web.state import get_config, get_store
+from dolt.web.state import get_config, get_store, init_state
+
+init_state()
 
 
 def render() -> None:
@@ -77,3 +79,6 @@ def render() -> None:
                     st.warning(err)
         except Exception as e:
             st.error(f"Export 실패: {e}")
+
+
+render()

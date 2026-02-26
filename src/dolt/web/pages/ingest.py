@@ -8,7 +8,9 @@ from pathlib import Path
 import streamlit as st
 
 from dolt.ingestion.ingestor import SUPPORTED_EXTENSIONS, Ingestor
-from dolt.web.state import get_store
+from dolt.web.state import get_store, init_state
+
+init_state()
 
 
 def render() -> None:
@@ -82,3 +84,6 @@ def _show_results(results: list[tuple[str, str, str | None]]) -> None:
             st.error(f"{name}: {err}")
         else:
             st.write(f"- {name} — `{status}`")
+
+
+render()

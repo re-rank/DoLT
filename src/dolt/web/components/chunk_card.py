@@ -25,7 +25,8 @@ def render_chunk_cards(chunks: list[Chunk]) -> None:
     avg_tokens = sum(c.token_count for c in chunks) / len(chunks)
     col2.metric("평균 토큰", f"{avg_tokens:.0f}")
     types = {t.value: sum(1 for c in chunks if c.chunk_type == t) for t in ChunkType}
-    col3.metric("텍스트/표/코드", f"{types.get('text', 0)} / {types.get('table', 0)} / {types.get('code', 0)}")
+    t, tb, c = types.get("text", 0), types.get("table", 0), types.get("code", 0)
+    col3.metric("텍스트/표/코드", f"{t} / {tb} / {c}")
 
     st.divider()
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 import streamlit as st
 
 from dolt.models.chunk import EmbeddedChunk
-from dolt.models.config import DoltConfig, EmbeddingProvider
+from dolt.models.config import EmbeddingProvider
 from dolt.pipeline.orchestrator import _create_embedding_provider
 from dolt.web.state import get_config, get_store, init_state
 
@@ -82,7 +82,9 @@ def render() -> None:
     for doc, _ in docs_with_chunks:
         emb = store.load_embeddings(doc.doc_id)
         if emb:
-            st.write(f"- {doc.file_name}: {len(emb)} embedded (dim={emb[0].embedding_dim}, model={emb[0].embedding_model})")
+            dim = emb[0].embedding_dim
+            model = emb[0].embedding_model
+            st.write(f"- {doc.file_name}: {len(emb)} embedded (dim={dim}, model={model})")
         else:
             st.write(f"- {doc.file_name}: 미완료")
 

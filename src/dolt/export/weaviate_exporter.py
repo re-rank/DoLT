@@ -102,9 +102,13 @@ class WeaviateExporter(BaseExporter):
 
         if self._api_key:
             auth = weaviate.auth.AuthApiKey(api_key=self._api_key)
+            host = self._url.replace("http://", "").replace("https://", "")
+            host_part = host.split(":")[0]
+            has_port = ":" in self._url.split("//")[-1]
+            port = int(self._url.split(":")[-1]) if has_port else 8080
             return weaviate.connect_to_custom(
-                http_host=self._url.replace("http://", "").replace("https://", "").split(":")[0],
-                http_port=int(self._url.split(":")[-1]) if ":" in self._url.split("//")[-1] else 8080,
+                http_host=host_part,
+                http_port=port,
                 http_secure=self._url.startswith("https"),
                 auth_credentials=auth,
             )

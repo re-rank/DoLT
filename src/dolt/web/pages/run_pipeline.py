@@ -9,7 +9,7 @@ import streamlit as st
 
 from dolt.models.config import ChunkMode, EmbeddingProvider, ExportTarget
 from dolt.pipeline.orchestrator import PipelineOrchestrator, StageResult
-from dolt.web.components.progress_tracker import STAGES, STAGE_LABELS
+from dolt.web.components.progress_tracker import STAGE_LABELS, STAGES
 from dolt.web.state import get_config, init_state
 
 init_state()

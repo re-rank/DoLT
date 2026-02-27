@@ -46,7 +46,7 @@ weaviate = ["weaviate-client>=4.0"]
 postgres = ["psycopg2-binary>=2.9", "pgvector>=0.2"]
 web = ["streamlit>=1.30"]
 all = [
-    "dolt[cohere,docling,local,qdrant,pinecone,weaviate,postgres,web]",
+    "dolt[cohere,local,qdrant,pinecone,weaviate,postgres,web]",
 ]
 dev = [
     "pytest>=7.0",

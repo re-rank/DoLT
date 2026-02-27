@@ -7,8 +7,9 @@ from pathlib import Path
 
 import streamlit as st
 
-from dolt.models.config import ChunkMode, EmbeddingProvider, ExportTarget
+from dolt.models.config import ChunkMode
 from dolt.pipeline.orchestrator import PipelineOrchestrator, StageResult
+from dolt.plugins.loader import discover_embedding_providers, discover_exporters
 from dolt.web.components.progress_tracker import STAGE_LABELS, STAGES
 from dolt.web.state import get_config, init_state
 
@@ -42,8 +43,10 @@ def render() -> None:
     col1, col2, col3, col4 = st.columns(4)
     mode = col1.selectbox("청킹 모드", [m.value for m in ChunkMode], index=2)
     max_tokens = col2.number_input("최대 토큰", 100, 2000, 512)
-    provider = col3.selectbox("임베딩", [p.value for p in EmbeddingProvider])
-    target = col4.selectbox("Export", [t.value for t in ExportTarget])
+    embedding_plugins = discover_embedding_providers()
+    provider = col3.selectbox("임베딩", [name for name, _ in embedding_plugins])
+    exporter_plugins = discover_exporters()
+    target = col4.selectbox("Export", [name for name, _ in exporter_plugins])
 
     model_name = ""
     output_path = ".dolt/export.json"

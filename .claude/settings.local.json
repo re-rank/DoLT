@@ -32,7 +32,8 @@
       "WebFetch(domain:docling-project.github.io)",
       "WebFetch(domain:deepwiki.com)",
       "WebFetch(domain:www.codecademy.com)",
-      "Bash(pip show:*)"
+      "Bash(pip show:*)",
+      "Bash(find:*)"
     ]
   }
 }

@@ -13,6 +13,7 @@ pages = [
     st.Page("pages/embed.py", title="Embed", icon=":material/hub:"),
     st.Page("pages/export.py", title="Export", icon=":material/cloud_upload:"),
     st.Page("pages/run_pipeline.py", title="Run Pipeline", icon=":material/play_circle:"),
+    st.Page("pages/plugins.py", title="Plugins", icon=":material/extension:"),
 ]
 
 pg = st.navigation(pages)

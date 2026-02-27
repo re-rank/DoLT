@@ -5,8 +5,8 @@ from __future__ import annotations
 import streamlit as st
 
 from dolt.models.chunk import EmbeddedChunk
-from dolt.models.config import EmbeddingProvider
 from dolt.pipeline.orchestrator import _create_embedding_provider
+from dolt.plugins.loader import discover_embedding_providers
 from dolt.web.state import get_config, get_store, init_state
 
 init_state()
@@ -21,7 +21,9 @@ def render() -> None:
     # 설정
     st.subheader("설정")
     col1, col2, col3 = st.columns(3)
-    provider = col1.selectbox("Provider", [p.value for p in EmbeddingProvider])
+    embedding_plugins = discover_embedding_providers()
+    provider_names = [name for name, _ in embedding_plugins]
+    provider = col1.selectbox("Provider", provider_names)
     model = col2.text_input("모델명 (빈칸=기본값)", value="")
     batch_size = col3.number_input("Batch Size", 1, 500, config.embedding.batch_size)
 

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import streamlit as st
 
-from dolt.models.config import ExportTarget
 from dolt.pipeline.orchestrator import _create_exporter
+from dolt.plugins.loader import discover_exporters
 from dolt.web.state import get_config, get_store, init_state
 
 init_state()
@@ -31,7 +31,9 @@ def render() -> None:
     st.caption(f"내보내기 대상: {len(all_chunks)}개 청크")
 
     # 타겟 설정
-    target = st.selectbox("Export Target", [t.value for t in ExportTarget])
+    exporter_plugins = discover_exporters()
+    target_names = [name for name, _ in exporter_plugins]
+    target = st.selectbox("Export Target", target_names)
 
     overrides: dict = {"export": {"target": target}}
 

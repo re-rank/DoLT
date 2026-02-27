@@ -343,6 +343,12 @@ pytest --cov=dolt --cov-report=html
 
 ---
 
+## Contact Us
+
+- Email: [hojin_park@re-rank.org](mailto:hojin_park@re-rank.org)
+
+---
+
 ## License
 
 [Apache License 2.0](LICENSE)

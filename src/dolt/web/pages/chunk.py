@@ -43,7 +43,8 @@ def render() -> None:
     # 일괄 청킹
     if st.button("전체 청킹 실행"):
         chunker = _create_chunker(config.model_copy(update={"chunking": chunk_cfg}))
-        enricher = MetadataEnricher()
+        active_names: list[str] = st.session_state.get("active_metadata_plugins", [])
+        enricher = MetadataEnricher.from_names(active_names) if active_names else MetadataEnricher(plugins=[])
         progress = st.progress(0)
         total = 0
 

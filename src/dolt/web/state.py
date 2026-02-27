@@ -14,6 +14,12 @@ def init_state() -> None:
         st.session_state.config = DoltConfig.load()
     if "store" not in st.session_state:
         st.session_state.store = LocalStore(st.session_state.config.storage.path)
+    if "active_metadata_plugins" not in st.session_state:
+        from dolt.plugins.loader import discover_metadata_plugins
+
+        st.session_state.active_metadata_plugins = [
+            name for name, _ in discover_metadata_plugins()
+        ]
 
 
 def get_config() -> DoltConfig:

@@ -18,6 +18,20 @@ class MetadataEnricher:
             plugins = _default_plugins()
         self._plugins = list(plugins)
 
+    @classmethod
+    def from_names(cls, names: list[str]) -> MetadataEnricher:
+        """entry_point 이름으로 선택된 플러그인만 로딩한다."""
+        from dolt.plugins.loader import discover_metadata_plugins
+
+        available = {name: plugin_cls for name, plugin_cls in discover_metadata_plugins()}
+        plugins: list[MetadataPlugin] = []
+        for name in names:
+            if name in available:
+                plugins.append(available[name]())
+            else:
+                logger.warning("메타데이터 플러그인 '%s'를 찾을 수 없습니다.", name)
+        return cls(plugins=plugins)
+
     def add_plugin(self, plugin: MetadataPlugin) -> None:
         """플러그인을 추가 등록한다."""
         self._plugins.append(plugin)

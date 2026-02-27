@@ -626,6 +626,12 @@ pytest --cov=dolt --cov-report=html
 
 ---
 
+## Changelog
+
+[전체 변경 이력 보기 →](CHANGELOG.md)
+
+---
+
 ## License
 
 [Apache License 2.0](LICENSE)

@@ -20,6 +20,7 @@ env/
 .idea/
 *.swp
 *.swo
+pyrightconfig.json
 
 # 환경변수
 .env
@@ -37,3 +38,7 @@ Thumbs.db
 
 # Cursor
 .cursor/rules/codacy.mdc
+
+
+#Ignore cursor AI rules
+.cursor\rules\codacy.mdc

@@ -134,7 +134,23 @@ dolt embed --provider openai
 dolt export --target qdrant --collection my_docs
 ```
 
-### 3. 상태 확인
+### 3. 웹 UI
+
+CLI 대신 브라우저에서 전체 파이프라인을 실행하고 결과를 확인할 수 있습니다.
+
+```bash
+pip install dolt[web]
+dolt-web
+```
+
+`http://localhost:8501`에서 웹 대시보드가 열립니다.
+
+- **Dashboard** — 문서·청크·임베딩 현황 요약
+- **Ingest → Parse → Chunk → Embed → Export** — 각 단계를 개별 실행
+- **Run Pipeline** — 전체 파이프라인 일괄 실행
+- **Plugins** — 설치된 플러그인 확인, 메타데이터 플러그인 활성/비활성 선택
+
+### 4. 상태 확인
 
 ```bash
 dolt status

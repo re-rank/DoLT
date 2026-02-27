@@ -34,11 +34,11 @@ dependencies = [
     "httpx>=0.25",
     "openai>=1.0",
     "pyyaml>=6.0",
+    "docling>=2.0",
 ]
 
 [project.optional-dependencies]
 cohere = ["cohere>=5.0"]
-docling = ["docling>=2.0"]
 local = ["sentence-transformers>=2.2"]
 qdrant = ["qdrant-client>=1.7"]
 pinecone = ["pinecone-client>=3.0"]
